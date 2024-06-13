@@ -87,6 +87,8 @@ flutter:
     - assets/MoneyPage2.png
     - assets/MoneyPage3.png
     - assets/WalletPage.png
+    - assets/GiftCard.png
+    - assets/Purchase.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:food_app/pages/claim_gift_card_page.dart';
 
 class GiftCardPage extends StatelessWidget {
   const GiftCardPage({super.key, required Null Function() onTap});
@@ -126,34 +127,58 @@ class GiftCardPage extends StatelessWidget {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(right: 20),
-                  child: Container(
-                    height: 50,
-                    width: 150,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      boxShadow: [
-                          BoxShadow(
-                              color: Colors.black.withOpacity(0.5),
-                              offset: Offset(0, 4),
-                              blurRadius: 15,
-                              spreadRadius: 1)
-                        ],
-                      gradient: LinearGradient(
-                        colors: [
-                          Color.fromARGB(255, 0, 0, 0),
-                          Color.fromARGB(255, 0, 0, 0),
-                        ],
-                        begin: Alignment.centerRight,
-                        end: Alignment.centerLeft,
+                  child: GestureDetector(
+                    onTap: (){
+                      Navigator.push(
+                                context,
+                                PageRouteBuilder(
+                                          transitionDuration: const Duration(milliseconds: 500),
+                                        pageBuilder: (context, animation, secondaryAnimation) => ClaimGiftCardPage(onTap: () {}),
+                                      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                                const begin = Offset(0.0, 1.0); 
+                               const end = Offset(0.0, 0.0);
+                                   const curve = Curves.easeInOut;
+                                        
+                                  var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+                                  var offsetAnimation = animation.drive(tween);
+                                        
+                                    return SlideTransition(
+                                           position: offsetAnimation,
+                                             child: child,
+                                                );
+                                           },
+                                       ),
+                                     );
+                    },
+                    child: Container(
+                      height: 50,
+                      width: 150,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        boxShadow: [
+                            BoxShadow(
+                                color: Colors.black.withOpacity(0.5),
+                                offset: Offset(0, 4),
+                                blurRadius: 15,
+                                spreadRadius: 1)
+                          ],
+                        gradient: LinearGradient(
+                          colors: [
+                            Color.fromARGB(255, 0, 0, 0),
+                            Color.fromARGB(255, 0, 0, 0),
+                          ],
+                          begin: Alignment.centerRight,
+                          end: Alignment.centerLeft,
+                        ),
                       ),
-                    ),
-                    child: Center(
-                      child: Text(
-                        'Claim gift card',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 17,
-                          fontWeight: FontWeight.w400,
+                      child: Center(
+                        child: Text(
+                          'Claim gift card',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 17,
+                            fontWeight: FontWeight.w400,
+                          ),
                         ),
                       ),
                     ),

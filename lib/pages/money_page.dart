@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:food_app/pages/claim_gift_card_page.dart';
 import 'package:food_app/pages/gift_card_page.dart';
 import 'package:food_app/pages/location_page.dart';
+import 'package:food_app/pages/purchase_history_page.dart';
 import 'package:food_app/pages/wallet_page.dart';
 
 class MoneyPage extends StatelessWidget {
@@ -394,7 +396,28 @@ class MoneyPage extends StatelessWidget {
                        Text("Claim a Gift Card", style: TextStyle(color: Colors.white, fontSize: 17, fontWeight: FontWeight.w400),),
                         const SizedBox(width: 200),
                          GestureDetector(
-                          onTap:  () {},
+                          onTap:  () {
+                            Navigator.push(
+                                context,
+                                PageRouteBuilder(
+                                          transitionDuration: const Duration(milliseconds: 500),
+                                        pageBuilder: (context, animation, secondaryAnimation) => ClaimGiftCardPage(onTap: () {}),
+                                      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                                const begin = Offset(0.0, 1.0); 
+                               const end = Offset(0.0, 0.0);
+                                   const curve = Curves.easeInOut;
+                                        
+                                  var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+                                  var offsetAnimation = animation.drive(tween);
+                                        
+                                    return SlideTransition(
+                                           position: offsetAnimation,
+                                             child: child,
+                                                );
+                                           },
+                                       ),
+                                     );
+                          },
                           child: Icon(Icons.arrow_forward_ios, size: 15, color: Colors.white,))
                            ],
                             ),
@@ -453,7 +476,30 @@ class MoneyPage extends StatelessWidget {
                        children: [
                        Text("Purchase History", style: TextStyle(color: Colors.white, fontSize: 17, fontWeight: FontWeight.w400),),
                         const SizedBox(width: 200),
-                        Icon(Icons.arrow_forward_ios, size: 15, color: Colors.white,)
+                        GestureDetector(
+                          onTap: (){
+                            Navigator.push(
+                                context,
+                                PageRouteBuilder(
+                                          transitionDuration: const Duration(milliseconds: 500),
+                                        pageBuilder: (context, animation, secondaryAnimation) => PurchaseHistoryPage(onTap: () {}),
+                                      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                                const begin = Offset(0.0, 1.0); 
+                               const end = Offset(0.0, 0.0);
+                                   const curve = Curves.easeInOut;
+                                        
+                                  var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+                                  var offsetAnimation = animation.drive(tween);
+                                        
+                                    return SlideTransition(
+                                           position: offsetAnimation,
+                                             child: child,
+                                                );
+                                           },
+                                       ),
+                                     );
+                          },
+                          child: Icon(Icons.arrow_forward_ios, size: 15, color: Colors.white,))
                        ],
                     ),
                    ),
