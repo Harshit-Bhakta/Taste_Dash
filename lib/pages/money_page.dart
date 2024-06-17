@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:food_app/pages/claim_gift_card_page.dart';
 import 'package:food_app/pages/gift_card_page.dart';
+import 'package:food_app/pages/gift_cards_pages.dart';
 import 'package:food_app/pages/location_page.dart';
 import 'package:food_app/pages/purchase_history_page.dart';
 import 'package:food_app/pages/wallet_page.dart';
@@ -361,15 +362,38 @@ class MoneyPage extends StatelessWidget {
                                         height: 140,
                                       ),
                                      const SizedBox(height: 3), 
-                                      const Padding(
-                                       padding: const EdgeInsets.only(left: 150,),
+                                       Padding(
+                                       padding:  EdgeInsets.only(left: 150,),
                                        child: Row(
                                        children: [
                                        Text("Buy Now",
                                       style: TextStyle(color: Colors.greenAccent, fontSize: 15, fontWeight: FontWeight.w400),
                                          ),
                                          SizedBox(width: 1,),
-                                      Icon(Icons.arrow_forward, color: Colors.greenAccent, size: 18,)
+                                      GestureDetector(
+                                        onTap: (){
+                                          Navigator.push(
+                                context,
+                                PageRouteBuilder(
+                                          transitionDuration: const Duration(milliseconds: 500),
+                                        pageBuilder: (context, animation, secondaryAnimation) => GiftCardsPage(onTap: () {}),
+                                      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                                const begin = Offset(0.0, 1.0); 
+                               const end = Offset(0.0, 0.0);
+                                   const curve = Curves.easeInOut;
+                                        
+                                  var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+                                  var offsetAnimation = animation.drive(tween);
+                                        
+                                    return SlideTransition(
+                                           position: offsetAnimation,
+                                             child: child,
+                                                );
+                                           },
+                                       ),
+                                     );
+                                        },
+                                        child: Icon(Icons.arrow_forward, color: Colors.greenAccent, size: 18,))
                                        ],
                                         ),
                                      )
